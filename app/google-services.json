@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "251982195136",
+    "firebase_url": "https://timesheet-for-employees.firebaseio.com",
+    "project_id": "timesheet-for-employees",
+    "storage_bucket": "timesheet-for-employees.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:251982195136:android:b7b3eec5f2116c34390025",
+        "android_client_info": {
+          "package_name": "com.example.timesheetforemployees"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "251982195136-hol4soo52cgs9v79i97iklcqe928ggi0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsiA5tqwEtrPCPeZeeeIPYN_E1NeGgG4M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "251982195136-hol4soo52cgs9v79i97iklcqe928ggi0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

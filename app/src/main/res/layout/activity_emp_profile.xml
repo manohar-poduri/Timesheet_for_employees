@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EmpProfile"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="250dp"
+           android:background="#757272">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ImageView>
+
+     </LinearLayout>
+
+         <LinearLayout
+           android:layout_margin="5dp"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:orientation="vertical">
+
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:text="Personal Details"
+               android:textColor="#F80404"
+               android:textSize="15dp">
+
+           </TextView>
+
+           <com.google.android.material.textfield.TextInputLayout
+               android:id="@+id/name_profile"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="Full Name">
+
+               <com.google.android.material.textfield.TextInputEditText
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:drawableLeft="@drawable/name"
+                   android:drawablePadding="10dp" />
+
+           </com.google.android.material.textfield.TextInputLayout>
+
+           <com.google.android.material.textfield.TextInputLayout
+               android:id="@+id/designation_profile"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="Designation">
+
+               <com.google.android.material.textfield.TextInputEditText
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:drawableLeft="@drawable/workspace"
+                   android:drawablePadding="10dp" />
+
+           </com.google.android.material.textfield.TextInputLayout>
+
+           <com.google.android.material.textfield.TextInputLayout
+               android:id="@+id/birth_profile"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="D O B">
+
+               <com.google.android.material.textfield.TextInputEditText
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:drawableLeft="@drawable/birthda"
+                   android:drawablePadding="10dp" />
+
+           </com.google.android.material.textfield.TextInputLayout>
+
+           <com.google.android.material.textfield.TextInputLayout
+               android:id="@+id/join_profile"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="Date of join">
+
+               <com.google.android.material.textfield.TextInputEditText
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:drawableLeft="@drawable/join"
+                   android:drawablePadding="10dp" />
+
+           </com.google.android.material.textfield.TextInputLayout>
+
+           <com.google.android.material.textfield.TextInputLayout
+               android:id="@+id/father_profile"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="Father">
+
+               <com.google.android.material.textfield.TextInputEditText
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:drawableLeft="@drawable/father"
+                   android:drawablePadding="10dp" />
+
+           </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="Communication Details"
+               android:textColor="#F80505"
+               android:textSize="15dp"></TextView>
+
+             <com.google.android.material.textfield.TextInputLayout
+                 android:id="@+id/phone_profile"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:hint="Phone no.">
+
+                 <com.google.android.material.textfield.TextInputEditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:drawableLeft="@drawable/phone"
+                     android:drawablePadding="10dp" />
+
+             </com.google.android.material.textfield.TextInputLayout>
+
+             <com.google.android.material.textfield.TextInputLayout
+                 android:id="@+id/email_profile"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:hint="Email">
+
+                 <com.google.android.material.textfield.TextInputEditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:drawableLeft="@drawable/mail"
+                     android:drawablePadding="10dp" />
+
+             </com.google.android.material.textfield.TextInputLayout>
+
+       </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
