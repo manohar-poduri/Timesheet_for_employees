@@ -17,6 +17,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.jar.Attributes;
+
 public class MainActivity3 extends AppCompatActivity {
 
     TextInputLayout Name, Designation, Birth, Father, Email, Phone, Password;
@@ -24,6 +26,9 @@ public class MainActivity3 extends AppCompatActivity {
 
     DatabaseReference databaseReference;
     FirebaseAuth auth;
+
+    FirebaseDatabase rootNode;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,19 +66,20 @@ public class MainActivity3 extends AppCompatActivity {
                 Toast.makeText(MainActivity3.this, "Wait for Approval", Toast.LENGTH_SHORT).show();*/
 
 
-                databaseReference = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Employee " +
-                        "Details").child(Name.getEditText().getText().toString());
+                databaseReference = FirebaseDatabase.getInstance().getReference("Employee Details");
 
                 UserHelperClass userHelperClass = new UserHelperClass();
 
+                String name = Name.getEditText().getText().toString();
                 userHelperClass.setName(Name.getEditText().getText().toString());
                 userHelperClass.setDesignation(Designation.getEditText().getText().toString());
+                userHelperClass.setBirth(Birth.getEditText().getText().toString());
                 userHelperClass.setFather(Father.getEditText().getText().toString());
                 userHelperClass.setEmail(Email.getEditText().getText().toString());
                 userHelperClass.setPhone(Phone.getEditText().getText().toString());
                 userHelperClass.setPassword(Password.getEditText().getText().toString());
 
-                databaseReference.push().setValue(userHelperClass);
+                databaseReference.child(name).setValue(userHelperClass);
 
 
                 auth.createUserWithEmailAndPassword(Email.getEditText().getText().toString(),
@@ -83,17 +89,15 @@ public class MainActivity3 extends AppCompatActivity {
                         if (task.isSuccessful()){
                             Toast.makeText(MainActivity3.this, "wait for approval", Toast.LENGTH_SHORT).show();
 
-                            Toast.makeText(MainActivity3.this, "please go to Login activity after approval", Toast.LENGTH_SHORT).show();
+
+                            Intent intent = new Intent(MainActivity3.this,MainActivity2.class);
+                            startActivity(intent);
 
                         } else{
-                            Toast.makeText(MainActivity3.this, "please make a details completely", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity3.this, "wait for approval", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-
-
-
-
             }
         });
     }

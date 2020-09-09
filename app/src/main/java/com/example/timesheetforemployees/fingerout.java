@@ -42,9 +42,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class fingerout extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     LocationManager locationManager;
@@ -59,7 +58,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.activity_fingerout);
 
         login = findViewById(R.id.login_btn);
         username = findViewById(R.id.phonelogin);
@@ -84,7 +83,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(MapsActivity.this, "Please wait few second's", Toast.LENGTH_SHORT).show();
+                Toast.makeText(fingerout.this, "Please wait few second's", Toast.LENGTH_SHORT).show();
 
                 final String userEnteredPhone = username.getEditText().getText().toString().trim();
 
@@ -146,52 +145,57 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                                     double latitude = location.getLatitude();
                                     double longitude = location.getLongitude();
+                                    Date name = new Date();
 
-                                    LocationHelper locationHelper = new LocationHelper(location.getLongitude(),
-                                            location.getLatitude());
+                                    LocationHelper2 locationHelper2 =
+                                            new LocationHelper2(location.getLongitude(),
+                                            location.getLatitude(),name);
 
 
                                     FirebaseDatabase.getInstance().getReference().child("Punch " +
-                                            "In").child(username.getEditText().getText().toString()).setValue(locationHelper).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            "Out").child(username.getEditText().getText().toString()).setValue(locationHelper2).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()){
 
-                                                    final Handler handler = new Handler();
+                                                final Handler handler = new Handler();
 
-                                                    Runnable runnable = new Runnable() {
-                                                        @Override
-                                                        public void run() {
-                                                            handler.postDelayed(this, 1000);
-                                                            try {
+                                                Runnable runnable = new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        handler.postDelayed(this, 1000);
+                                                        try {
 
-                                                                Date date = new Date();
-                                                                Date newDate = new Date(date.getTime() + (604800000L * 2) + (24 * 60 * 60));
-                                                                SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
-                                                                String stringdate = dt.format(newDate);
+                                                            Date date = new Date();
+                                                            Date newDate = new Date(date.getTime() + (604800000L * 2) + (24 * 60 * 60));
+                                                            SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
+                                                            String stringdate = dt.format(newDate);
 
-                                                                String simpleDateFormatTime =
-                                                                        DateFormat.getTimeInstance().format(new Date());
+                                                            String simpleDateFormatTime =
+                                                                    DateFormat.getTimeInstance().format(new Date());
 
-                                                                Log.d("TAG", "run: " + simpleDateFormatTime);
+                                                            Log.d("TAG", "run: " + simpleDateFormatTime);
 
-                                                                System.out.println("Submission Date: " + stringdate);
-                                                                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Punch In");
-                                                                databaseReference.child(username.getEditText().getText().toString()).child("date").setValue(stringdate);
+                                                            System.out.println("Submission Date: " + stringdate);
+                                                            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Punch Out");
+                                                            databaseReference.child(username.getEditText().getText().toString()).child("date").setValue(stringdate);
 
-                                                                DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference().child("Punch In");
-                                                                databaseReference1.child(username.getEditText().getText().toString()).child("time").setValue(simpleDateFormatTime);
+                                                            DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference().child("Punch Out");
+                                                            databaseReference1.child(username.getEditText().getText().toString()).child("time").setValue(simpleDateFormatTime);
 
-                                                            } catch (Exception e) {
-                                                                e.printStackTrace();
-                                                            }
+                                                        } catch (Exception e) {
+                                                            e.printStackTrace();
                                                         }
-                                                    };
-                                                    handler.postDelayed(runnable, 1 * 1000);
+                                                    }
+                                                };
+                                                handler.postDelayed(runnable, 1 * 1000);
 
-                                                Toast.makeText(MapsActivity.this, "Location saved!!", Toast.LENGTH_SHORT).show();
+
+                                                Toast.makeText(fingerout.this, "Location saved!!",
+                                                        Toast.LENGTH_SHORT).show();
                                             } else {
-                                                Toast.makeText(MapsActivity.this, "Location not saved!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(fingerout.this, "Location not saved!!",
+                                                        Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });
@@ -240,15 +244,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                                     double latitude = location.getLatitude();
                                     double longitude = location.getLongitude();
+                                    Date name = new Date();
 
-                                    LocationHelper locationHelper = new LocationHelper(location.getLongitude(),
-                                            location.getLatitude());
+                                    LocationHelper2 locationHelper2 =
+                                            new LocationHelper2(location.getLongitude(),
+                                            location.getLatitude(),name);
 
                                     FirebaseDatabase.getInstance().getReference().child("Punch " +
-                                            "In").child(username.getEditText().getText().toString()).setValue(locationHelper).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
+                                            "Out").child(username.getEditText().getText().toString()).setValue(locationHelper2).addOnCompleteListener(new OnCompleteListener<Void>() {                                        @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()){
+
+
                                                 final Handler handler = new Handler();
 
                                                 Runnable runnable = new Runnable() {
@@ -268,10 +275,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                                             Log.d("TAG", "run: " + simpleDateFormatTime);
 
                                                             System.out.println("Submission Date: " + stringdate);
-                                                            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Punch In");
+                                                            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Punch Out");
                                                             databaseReference.child(username.getEditText().getText().toString()).child("date").setValue(stringdate);
 
-                                                            DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference().child("Punch In");
+                                                            DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference().child("Punch Out");
                                                             databaseReference1.child(username.getEditText().getText().toString()).child("time").setValue(simpleDateFormatTime);
 
                                                         } catch (Exception e) {
@@ -280,9 +287,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                                     }
                                                 };
                                                 handler.postDelayed(runnable, 1 * 1000);
-                                                Toast.makeText(MapsActivity.this, "Location saved!!", Toast.LENGTH_SHORT).show();
+
+
+                                                Toast.makeText(fingerout.this, "Location saved!!",
+                                                        Toast.LENGTH_SHORT).show();
                                             } else {
-                                                Toast.makeText(MapsActivity.this, "Location not saved!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(fingerout.this, "Location not saved!!",
+                                                        Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });
@@ -298,7 +309,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //                                string += addresses.get(0).getLocality();
 //                                string += addresses.get(0).getSubLocality();
                                         mMap.addMarker(new MarkerOptions().position(latLng).title("Your Location"));
-                                        Toast.makeText(MapsActivity.this,
+                                        Toast.makeText(fingerout.this,
                                                 location.getLatitude() + "," + location.getLongitude(),
                                                 Toast.LENGTH_SHORT).show();
                                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,16));
@@ -355,7 +366,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
         mMap.addMarker(markerOptions);*/
     }
-
 
 
 

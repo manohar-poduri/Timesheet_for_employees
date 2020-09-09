@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class PunchInPunchOut extends AppCompatActivity {
+public class EmployeeProfileId extends AppCompatActivity {
 
     LinearLayout in, out;
     TextView textView;
@@ -17,7 +17,7 @@ public class PunchInPunchOut extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_punch_in_punch_out);
+        setContentView(R.layout.activity_employee_profile_id);
 
         in = findViewById(R.id.PunchIn);
         out = findViewById(R.id.PunchOut);
@@ -29,7 +29,7 @@ public class PunchInPunchOut extends AppCompatActivity {
         in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PunchInPunchOut.this, finger.class);
+                Intent intent = new Intent(EmployeeProfileId.this, PunchInAttendance.class);
                 startActivity(intent);
             }
         });
@@ -37,7 +37,7 @@ public class PunchInPunchOut extends AppCompatActivity {
         out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PunchInPunchOut.this, fingerpunchout.class);
+                Intent intent = new Intent(EmployeeProfileId.this, PunchOutAttendance.class);
                 startActivity(intent);
             }
         });

@@ -8,81 +8,60 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class User_profile extends AppCompatActivity {
 
-    LinearLayout profile, ChangePassword, finger, leave;
+    LinearLayout profile, report, finger, leave, view;
     TextView name_field;
 
 
     UserHelperClass userHelperClass;
 
-    DatabaseReference databaseReference;
 
-
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
         profile = findViewById(R.id.ProfileDetails);
-//        ChangePassword = findViewById(R.id.ChangePassword);
         finger = findViewById(R.id.finger);
         name_field = findViewById(R.id.name_field);
         leave = findViewById(R.id.ApplyLeave);
+        report = findViewById(R.id.report);
+        view = findViewById(R.id.ViewAttendance);
 
         userHelperClass = new UserHelperClass();
 
-           DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(
-                   "Employee Details");
-           DatabaseReference databaseReference1 = databaseReference.child("name");
-
-           databaseReference1.addValueEventListener(new ValueEventListener() {
-               @Override
-               public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                  name_field.setText(snapshot.getValue(String.class));
+        DatabaseReference databaseReference =
+                FirebaseDatabase.getInstance().getReference("Employee Details");
 
 
-               }
+        ValueEventListener valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-               @Override
-               public void onCancelled(@NonNull DatabaseError error) {
-
-               }
-           });
-
-           /* ValueEventListener valueEventListener = new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                    String name =
-                            String.valueOf(snapshot.child("name").getValue(UserHelperClass.class));
-
-                    name_field.setText(name);
-
-                    *//*String name =
-                            String.valueOf(snapshot.child("sam").child("name").getValue(UserHelperClass.class));
-
-                    name_field.setText(name);*//*
-
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
+                String name = String.valueOf(snapshot.child("Employee Details").getValue(UserHelperClass.class));
 
 
-            };
+            }
 
-            databaseReference2.addValueEventListener(valueEventListener);*/
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+
+        };
+
+        databaseReference.addValueEventListener(valueEventListener);
 
 
         leave.setOnClickListener(new View.OnClickListener() {
@@ -93,36 +72,56 @@ public class User_profile extends AppCompatActivity {
             }
         });
 
-        /*ChangePassword.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-
-               Intent intent = new Intent(User_profile.this, ChangePassword.class);
-               startActivity(intent);
-
-            }
-       });*/
-
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(User_profile.this, EmpProfile.class);
+                Intent intent = new Intent(User_profile.this, EnterPhoneProfile.class);
                 startActivity(intent);
 
             }
         });
 
+        finger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-       finger.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
+                Intent intent = new Intent(User_profile.this, PunchInPunchOut.class);
+                startActivity(intent);
+            }
+        });
 
-               Intent intent = new Intent(User_profile.this, finger.class);
-               startActivity(intent);
-           }
-       });
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(User_profile.this, EmployeeProfileId.class);
+                startActivity(intent);
+            }
+        });
+
+
+        report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(User_profile.this, Reports.class);
+                startActivity(intent);
+            }
+        });
+
+        showAllUserDate();
     }
+
+    private void showAllUserDate() {
+
+        Intent intent = getIntent();
+
+        String user_email = intent.getStringExtra("email");
+
+        name_field.setText(user_email);
+
+    }
+
 
 
 }

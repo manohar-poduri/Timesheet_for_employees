@@ -19,7 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class EnterPhoneProfile extends AppCompatActivity {
+public class PunchInAttendance extends AppCompatActivity {
 
     TextView textView;
     ImageView login;
@@ -28,7 +28,7 @@ public class EnterPhoneProfile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_enter_phone_profile);
+        setContentView(R.layout.activity_punch_in_attendance);
 
 
         login = findViewById(R.id.login_btn);
@@ -43,13 +43,15 @@ public class EnterPhoneProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(EnterPhoneProfile.this, "Please wait few second's", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PunchInAttendance.this, "Please wait few second's", Toast.LENGTH_SHORT).show();
 
                 final String userEnteredPhone = username.getEditText().getText().toString().trim();
 
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Employee Details");
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Punch " +
+                        "In");
 
-                Query checkUser = reference.orderByChild("name").equalTo(userEnteredPhone);
+                Query checkUser =
+                        reference.orderByChild(userEnteredPhone);
 
                 checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -60,8 +62,13 @@ public class EnterPhoneProfile extends AppCompatActivity {
                             username.setError(null);
                             username.setErrorEnabled(false);
 
+                            String dateFromDB =
+                                    datasnapshot.child(userEnteredPhone).child("date").getValue(String.class);
+                            String timeFromDB =
+                                    datasnapshot.child(userEnteredPhone).child("time").getValue(String.class);
 
-                            String nameFromDB = datasnapshot.child(userEnteredPhone).child("name").getValue(String.class);
+
+                            /*String nameFromDB = datasnapshot.child(userEnteredPhone).child("name").getValue(String.class);
                             String designationFromDB = datasnapshot.child(userEnteredPhone).child("designation").getValue(String.class);
                             String birthFromDB = datasnapshot.child(userEnteredPhone).child("birth").getValue(String.class);
                             String joinFromDB = datasnapshot.child(userEnteredPhone).child("join").getValue(String.class);
@@ -69,7 +76,7 @@ public class EnterPhoneProfile extends AppCompatActivity {
                             String phoneFromDB = datasnapshot.child(userEnteredPhone).child("phone").getValue(String.class);
                             String emailFromDB = datasnapshot.child(userEnteredPhone).child("email").getValue(String.class);
 
-                            Intent intent = new Intent(getApplicationContext(), EmpProfile.class);
+
 
 
                             intent.putExtra("name", nameFromDB);
@@ -78,14 +85,19 @@ public class EnterPhoneProfile extends AppCompatActivity {
                             intent.putExtra("join", joinFromDB);
                             intent.putExtra("father", fatherFromDB);
                             intent.putExtra("phone", phoneFromDB);
-                            intent.putExtra("email", emailFromDB);
+                            intent.putExtra("email", emailFromDB);*/
+
+                            Intent intent = new Intent(getApplicationContext(), PunchInViewAttendance.class);
+
+                            intent.putExtra("date",dateFromDB);
+                            intent.putExtra("time",timeFromDB);
 
                             startActivity(intent);
 
-                            Toast.makeText(EnterPhoneProfile.this, "Account verify", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PunchInAttendance.this, "Account verify", Toast.LENGTH_SHORT).show();
 
                         } else {
-                            Toast.makeText(EnterPhoneProfile.this, "Employee Id is incorrect", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PunchInAttendance.this, "Employee Id is incorrect", Toast.LENGTH_SHORT).show();
                             username.setError("Employee Id is incorrect");
                             username.requestFocus();
                         }

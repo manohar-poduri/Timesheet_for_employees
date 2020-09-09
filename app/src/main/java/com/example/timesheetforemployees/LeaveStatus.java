@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.timesheetforemployees.EmpProfile;
+import com.example.timesheetforemployees.R;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,7 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class EnterPhoneProfile extends AppCompatActivity {
+public class LeaveStatus extends AppCompatActivity {
 
     TextView textView;
     ImageView login;
@@ -28,7 +30,7 @@ public class EnterPhoneProfile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_enter_phone_profile);
+        setContentView(R.layout.activity_leave_status);
 
 
         login = findViewById(R.id.login_btn);
@@ -43,13 +45,13 @@ public class EnterPhoneProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(EnterPhoneProfile.this, "Please wait few second's", Toast.LENGTH_SHORT).show();
+                Toast.makeText(com.example.timesheetforemployees.LeaveStatus.this, "Please wait few second's", Toast.LENGTH_SHORT).show();
 
                 final String userEnteredPhone = username.getEditText().getText().toString().trim();
 
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Employee Details");
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("LeaveDetails");
 
-                Query checkUser = reference.orderByChild("name").equalTo(userEnteredPhone);
+                Query checkUser = reference.orderByChild("phonenumber").equalTo(userEnteredPhone);
 
                 checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -61,31 +63,31 @@ public class EnterPhoneProfile extends AppCompatActivity {
                             username.setErrorEnabled(false);
 
 
-                            String nameFromDB = datasnapshot.child(userEnteredPhone).child("name").getValue(String.class);
-                            String designationFromDB = datasnapshot.child(userEnteredPhone).child("designation").getValue(String.class);
-                            String birthFromDB = datasnapshot.child(userEnteredPhone).child("birth").getValue(String.class);
-                            String joinFromDB = datasnapshot.child(userEnteredPhone).child("join").getValue(String.class);
-                            String fatherFromDB = datasnapshot.child(userEnteredPhone).child("father").getValue(String.class);
-                            String phoneFromDB = datasnapshot.child(userEnteredPhone).child("phone").getValue(String.class);
-                            String emailFromDB = datasnapshot.child(userEnteredPhone).child("email").getValue(String.class);
-
-                            Intent intent = new Intent(getApplicationContext(), EmpProfile.class);
+                            String nameFromDB = datasnapshot.child(userEnteredPhone).child("name_leave").getValue(String.class);
+                            String designationFromDB = datasnapshot.child(userEnteredPhone).child("approval").getValue(String.class);
+                            String birthFromDB = datasnapshot.child(userEnteredPhone).child("sick").getValue(String.class);
+                            String joinFromDB = datasnapshot.child(userEnteredPhone).child("holiday").getValue(String.class);
+                            String fatherFromDB = datasnapshot.child(userEnteredPhone).child("annual").getValue(String.class);
+                            String phoneFromDB = datasnapshot.child(userEnteredPhone).child("personal").getValue(String.class);
 
 
-                            intent.putExtra("name", nameFromDB);
-                            intent.putExtra("designation", designationFromDB);
-                            intent.putExtra("birth", birthFromDB);
-                            intent.putExtra("join", joinFromDB);
-                            intent.putExtra("father", fatherFromDB);
-                            intent.putExtra("phone", phoneFromDB);
-                            intent.putExtra("email", emailFromDB);
+                            Intent intent = new Intent(getApplicationContext(), ApplyLeave.class);
+
+
+                            intent.putExtra("name_leave", nameFromDB);
+                            intent.putExtra("approval", designationFromDB);
+                            intent.putExtra("sick", birthFromDB);
+                            intent.putExtra("holiday", joinFromDB);
+                            intent.putExtra("annual", fatherFromDB);
+                            intent.putExtra("personal", phoneFromDB);
+
 
                             startActivity(intent);
 
-                            Toast.makeText(EnterPhoneProfile.this, "Account verify", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LeaveStatus.this, "Account verify", Toast.LENGTH_SHORT).show();
 
                         } else {
-                            Toast.makeText(EnterPhoneProfile.this, "Employee Id is incorrect", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LeaveStatus.this, "Employee Id is incorrect", Toast.LENGTH_SHORT).show();
                             username.setError("Employee Id is incorrect");
                             username.requestFocus();
                         }

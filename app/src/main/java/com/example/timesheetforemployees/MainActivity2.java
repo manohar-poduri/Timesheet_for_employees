@@ -46,154 +46,78 @@ public class MainActivity2 extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
-        if (auth.getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(),User_profile.class));
-            finish();
-        }
-
-       /* login.setOnClickListener(new View.OnClickListener() {
-
-            private Boolean ValidateUsername()
-            {
-                String val = email.getEditText().getText().toString();
-
-                if (val.isEmpty()) {
-                    email.setError("Field cannot be empty");
-                    return false;
-                } else {
-                    email.setError(null);
-                    email.setErrorEnabled(false);
-                    return true;
-                }
-            }
-
-            private Boolean ValidatePassword() {
-
-                String val = password.getEditText().getText().toString();
-
-                if (val.isEmpty()) {
-                    password.setError("Field cannot be empty");
-                    return false;
-                } else {
-                    password.setError(null);
-                    password.setErrorEnabled(false);
-                    return true;
-                }
-            }
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
 
-                Toast.makeText(MainActivity2.this, "Please wait few second's", Toast.LENGTH_SHORT).show();
-                if (!ValidateUsername()|!ValidatePassword()) {
+                if (email.getEditText().getText().toString().equals("")){
+                    email.setError("email...");
+                    email.requestFocus();
+
+                }else if (password.getEditText().getText().toString().equals("")){
+                    password.setError("Password..");
+                    password.requestFocus();
                     return;
-                } else {
-                    final String userEnteredName = email.getEditText().getText().toString().trim();
-                    final String userEnteredPhone = password.getEditText().getText().toString().trim();
+                }
 
-                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Employee Details");
 
-                    Query checkUser = reference.orderByChild("name").equalTo(userEnteredName);
+                auth.signInWithEmailAndPassword(email.getEditText().getText().toString(),
+                        password.getEditText().getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()){
 
-                    checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                            String name = email.getEditText().getText().toString();
+                            Intent intent = new Intent(MainActivity2.this, User_profile.class);
+                            intent.putExtra("email", name);
+                            startActivity(intent);
+
+
+                        } else {
+                            Toast.makeText(MainActivity2.this, "Login Failed!!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+            }
+        });
+
+
+        btnforgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email_address = email.getEditText().getText().toString();
+
+                if (TextUtils.isEmpty(email_address)){
+                    Toast.makeText(MainActivity2.this, "please enter the email", Toast.LENGTH_SHORT).show();
+                } else{
+                    auth.sendPasswordResetEmail(email_address).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
-                        public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                        public void onComplete(@NonNull Task<Void> task) {
 
-                            if (datasnapshot.exists()) {
+                            if (task.isSuccessful()){
+                                Toast.makeText(MainActivity2.this, "link sent to your mail",
+                                        Toast.LENGTH_SHORT).show();
 
-                                email.setError(null);
-                                email.setErrorEnabled(false);
-
-                                String phoneFromDB = datasnapshot.child(userEnteredName).child("password").getValue(String.class);
-
-                                if (phoneFromDB.equals(userEnteredPhone)) {
-
-                                    email.setError(null);
-                                    email.setErrorEnabled(false);
-
-                                    String nameFromDB =
-                                            datasnapshot.child(userEnteredName).child("email").getValue(String.class);
-
-
-                                    Intent intent = new Intent(getApplicationContext(), User_profile.class);
-
-
-                                    intent.putExtra("email", nameFromDB);
-
-
-                                    startActivity(intent);
-
-                                    Toast.makeText(MainActivity2.this, "Thanks for login", Toast.LENGTH_SHORT).show();
-
-                                } else {
-                                    Toast.makeText(MainActivity2.this, "may be password is incorrect", Toast.LENGTH_SHORT).show();
-                                    password.setError("Please check your password");
-                                    password.requestFocus();
-                                }
                             } else {
-                                Toast.makeText(MainActivity2.this, "may be wrong username name", Toast.LENGTH_SHORT).show();
-                                email.setError("Please check your username");
-                                email.requestFocus();
+                                Toast.makeText(MainActivity2.this, "occur error", Toast.LENGTH_SHORT).show();
                             }
                         }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
                     });
-
                 }
             }
-        });*/
-
-       login.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-
-               if (email.getEditText().getText().toString().equals("")){
-                   email.setError("email...");
-                   email.requestFocus();
-
-               }else if (password.getEditText().getText().toString().equals("")){
-                   password.setError("Password..");
-                   password.requestFocus();
-                   return;
-               }
-
-               auth.signInWithEmailAndPassword(email.getEditText().getText().toString(),
-                       password.getEditText().getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                   @Override
-                   public void onComplete(@NonNull Task<AuthResult> task) {
-                       if (task.isSuccessful()){
-                           Toast.makeText(MainActivity2.this, "Login Successful!!", Toast.LENGTH_SHORT).show();
-                           startActivity(new Intent(MainActivity2.this,User_profile.class));
-
-                       } else {
-                           Toast.makeText(MainActivity2.this, "Login Failed!!", Toast.LENGTH_SHORT).show();
-                       }
-                   }
-               });
-
-           }
-       });
-
-
-       btnforgot.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               startActivity(new Intent(MainActivity2.this,ForgotPassword.class));
-           }
-       });
+        });
 
 
 
 
 
-       NewAdd.setOnClickListener(new View.OnClickListener() {
-       @Override
-       public void onClick(View v) {
-           Intent intent = new Intent(MainActivity2.this, MainActivity3.class);
-           startActivity(intent);
-           }
-       });
+        NewAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity2.this, MainActivity3.class);
+                startActivity(intent);
+            }
+        });
     }
 }

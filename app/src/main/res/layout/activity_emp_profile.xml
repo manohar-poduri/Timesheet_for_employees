@@ -44,6 +44,7 @@
 
            </TextView>
 
+<!--
            <com.google.android.material.textfield.TextInputLayout
                android:id="@+id/name_profile"
                android:layout_width="match_parent"
@@ -58,7 +59,33 @@
 
            </com.google.android.material.textfield.TextInputLayout>
 
-           <com.google.android.material.textfield.TextInputLayout
+-->
+
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:id="@+id/name_profile"
+                 android:text="Full name"
+                 android:padding="20dp"
+                 android:textSize="20sp"
+                 android:textColor="#000000"
+                 android:drawableLeft="@drawable/fullname"
+                 android:drawablePadding="10dp"/>
+
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:id="@+id/designation_profile"
+                 android:text="Designation"
+                 android:padding="20dp"
+                 android:textSize="20sp"
+                 android:textColor="#000000"
+                 android:drawableLeft="@drawable/designation"
+                 android:drawablePadding="10dp"/>
+
+
+<!--
+             <com.google.android.material.textfield.TextInputLayout
                android:id="@+id/designation_profile"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
@@ -71,8 +98,21 @@
                    android:drawablePadding="10dp" />
 
            </com.google.android.material.textfield.TextInputLayout>
+-->
 
-           <com.google.android.material.textfield.TextInputLayout
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:id="@+id/birth_profile"
+                 android:text="D O B"
+                 android:padding="20dp"
+                 android:textSize="20sp"
+                 android:textColor="#000000"
+                 android:drawableLeft="@drawable/dob"
+                 android:drawablePadding="10dp"/>
+
+<!--
+             <com.google.android.material.textfield.TextInputLayout
                android:id="@+id/birth_profile"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
@@ -85,8 +125,24 @@
                    android:drawablePadding="10dp" />
 
            </com.google.android.material.textfield.TextInputLayout>
+-->
 
-           <com.google.android.material.textfield.TextInputLayout
+<!--
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:id="@+id/join_profile"
+                 android:text="Date of join"
+                 android:padding="20dp"
+                 android:textSize="20sp"
+                 android:textColor="#000000"
+                 android:drawableLeft="@drawable/join"
+                 android:drawablePadding="10dp"/>
+-->
+
+
+<!--
+             <com.google.android.material.textfield.TextInputLayout
                android:id="@+id/join_profile"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
@@ -99,8 +155,22 @@
                    android:drawablePadding="10dp" />
 
            </com.google.android.material.textfield.TextInputLayout>
+-->
 
-           <com.google.android.material.textfield.TextInputLayout
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:id="@+id/father_profile"
+                 android:text="Father"
+                 android:padding="20dp"
+                 android:textSize="20sp"
+                 android:textColor="#000000"
+                 android:drawableLeft="@drawable/father"
+                 android:drawablePadding="10dp"/>
+
+
+<!--
+             <com.google.android.material.textfield.TextInputLayout
                android:id="@+id/father_profile"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
@@ -113,6 +183,7 @@
                    android:drawablePadding="10dp" />
 
            </com.google.android.material.textfield.TextInputLayout>
+-->
 
 
 
@@ -124,6 +195,19 @@
                android:textColor="#F80505"
                android:textSize="15dp"></TextView>
 
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:id="@+id/phone_profile"
+                 android:text="Phone no."
+                 android:padding="20dp"
+                 android:textSize="20sp"
+                 android:drawableLeft="@drawable/phone"
+                 android:textColor="#000000"
+                 android:drawablePadding="10dp"/>
+
+
+<!--
              <com.google.android.material.textfield.TextInputLayout
                  android:id="@+id/phone_profile"
                  android:layout_width="match_parent"
@@ -137,7 +221,20 @@
                      android:drawablePadding="10dp" />
 
              </com.google.android.material.textfield.TextInputLayout>
+-->
 
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:id="@+id/email_profile"
+                 android:text="Email"
+                 android:padding="20dp"
+                 android:textSize="20sp"
+                 android:drawableLeft="@drawable/email"
+                 android:textColor="#000000"
+                 android:drawablePadding="10dp"/>
+
+<!--
              <com.google.android.material.textfield.TextInputLayout
                  android:id="@+id/email_profile"
                  android:layout_width="match_parent"
@@ -151,6 +248,7 @@
                      android:drawablePadding="10dp" />
 
              </com.google.android.material.textfield.TextInputLayout>
+-->
 
        </LinearLayout>
 

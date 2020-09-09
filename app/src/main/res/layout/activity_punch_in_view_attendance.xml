@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PunchInViewAttendance">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtDate"
+        android:text="Date : "
+        android:layout_margin="20dp"
+        android:textSize="30sp"
+        android:textColor="#000000"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtDateFormat"
+        android:text="YYYY:MM:DD"
+        android:layout_toRightOf="@id/edtDate"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp"
+        android:textColor="#000000"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtTime"
+        android:layout_below="@id/edtDate"
+        android:text="Time : "
+        android:textColor="#000"
+        android:textSize="30sp"
+        android:layout_margin="20dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtTimeFormat"
+        android:text="HH:MM:SS"
+        android:layout_toRightOf="@id/edtTime"
+        android:layout_below="@id/edtDateFormat"
+        android:layout_marginTop="40dp"
+        android:textSize="30sp"
+        android:textColor="#000000"/>
+
+
+
+</RelativeLayout>

@@ -2,18 +2,27 @@ package com.example.timesheetforemployees;
 
 import java.util.Date;
 
-public class LocationHelper {
+public class LocationHelper2 {
 
+    private Date date;
 
     private double latitude;
     private double longitude;
 
-    public LocationHelper(double latitude, double longitud) {
+    public LocationHelper2(double latitude, double longitude, Date date) {
 
         this.latitude = latitude;
         this.longitude = longitude;
+        this.date = date;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public double getLatitude() {
         return latitude;

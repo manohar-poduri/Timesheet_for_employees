@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PunchInPunchOut"
+    tools:context=".EmployeeProfileId"
     android:background="@drawable/background1"
     android:orientation="vertical">
 
@@ -19,7 +19,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Punch In"
+            android:text="Punch In Attendance"
             android:layout_marginLeft="45dp"
             android:textColor="#fff"
             android:textStyle="bold"
@@ -68,7 +68,7 @@
             android:gravity="right"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Punch Out"
+            android:text="Punch Out Attendance"
             android:layout_marginRight="45dp"
             android:textColor="#fff"
             android:textStyle="bold"
